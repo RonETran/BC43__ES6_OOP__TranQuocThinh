@@ -1,8 +1,8 @@
-//Khai báo 1 prototype chứa các hàm kiểm tra nhập liệu
-function Validation () {
+
+export function Validation () {
     this.kiemTraRong = function (value,idError,name) {
         if(value.trim() === ''){
-            document.getElementById(idError).innerHTML = `${name} không được bỏ trống !`;
+            document.getElementById(idError).innerHTML = `${name} không được bỏ trống!  `;
             return false;
         }
         document.getElementById(idError).innerHTML = '';
@@ -15,7 +15,7 @@ function Validation () {
             document.getElementById(idError).innerHTML = ''
             return true;
         }
-        document.getElementById(idError).innerHTML = `${name} không hợp lệ!`;
+        document.getElementById(idError).innerHTML = `${name} không hợp lệ!  `;
         return false;
     }
 
@@ -25,7 +25,7 @@ function Validation () {
             document.getElementById(idError).innerHTML = '';
             return true;
         }
-        document.getElementById(idError).innerHTML = `${name} không hợp lệ!`;
+        document.getElementById(idError).innerHTML = `${name} không hợp lệ!  `;
         return false;
     }
 
@@ -35,28 +35,18 @@ function Validation () {
             document.getElementById(idError).innerHTML = '';
             return true;
         }
-        document.getElementById(idError).innerHTML = `${name} không hợp lệ!`;
+        document.getElementById(idError).innerHTML = `${name} không hợp lệ!  `;
         return false;
     }
 
     this.kiemTraDanhGia = function (value,idError,name) {
         var reg = /Chọn đánh giá/g;
         if (reg.test(value)) {
-            document.getElementById(idError).innerHTML = `Vui lòng chọn ${name} !`;
+            document.getElementById(idError).innerHTML = `Vui lòng chọn ${name}!  `;
             return false;
         }
         document.getElementById(idError).innerHTML = '';
         return true;
     }
 
-
-    this.kiemTraDiaChi = function (value,idError,name) {
-        var regexp = /^[\w\s.-]+\d+,\s*[\w\s.-]+$/;
-        if(regexp.test(value)) {
-            document.getElementById(idError).innerHTML = '';
-            return true;
-        }
-        document.getElementById(idError).innerHTML = `${name} phải gồm số nhà, tên đường, thành phố và dấu phẩy ngăn cách trước thành phố. (Ví dụ: )`;
-        return false;
-    }
 }

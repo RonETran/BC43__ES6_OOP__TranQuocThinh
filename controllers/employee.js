@@ -19,7 +19,7 @@ function renderTableEmployee(arrEmployee) {
         Object.assign(employee, emp);
         htmlContent += `
             <tr>
-                <td>E-${employee.id}</td>
+                <td>${employee.id}</td>
                 <td>${employee.fullName}</td>
                 <td>${employee.email}</td>
                 <td>${employee.address}</td>

@@ -1,8 +1,6 @@
 import { ListPerson } from "../models/ListPerson.js";
 import { Student } from "../models/Student.js";
 
-// let check = new Validation();
-
 document.getElementById("addStu").onclick = () => {
   document.getElementById("btn-update").disabled = true;
   document.getElementById("btn-add").disabled = false;
@@ -52,11 +50,7 @@ document.querySelector("#btn-add").onclick = function () {
     let { id, value } = input;
     stu[id] = value;
   }
-  // validation here
-  // var valid = true;
-  // valid = check.kiemTraRong(stu.id,'error-id','Mã') & check.kiemTraRong(stu.fullName,'error-name','Họ tên') & check.kiemTraRong(stu.email,'error-email','Email') & check.kiemTraRong(stu.id,'error-id','Mã')
-
-
+  
 
   listPerson.addPerson(stu);
   renderTableStudent(listPerson.arrPerson);
@@ -105,5 +99,7 @@ function getArrStudent() {
     listPerson.arrPerson = JSON.parse(stringStudent);
   }
 }
+
+
 
 
