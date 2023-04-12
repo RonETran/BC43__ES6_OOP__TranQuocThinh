@@ -1,5 +1,6 @@
 import {ListPerson} from '../models/ListPerson.js';
 import { Employee } from '../models/Employee.js';
+import { Validation } from '../util/Validation.js';
 
 
 document.getElementById('addEmp').onclick = () => {
@@ -44,11 +45,22 @@ function renderTableEmployee(arrEmployee) {
 
 document.querySelector('#btn-add').onclick = function () {
     var emp = new Employee();
+    let check = new Validation();
     var arrInput = document.querySelectorAll('.modal-body input');
     for (let input of arrInput) {
         let { id, value } = input;
         emp[id] = value;
     }
+    var valid = true;
+  valid = check.kiemTraRong(emp.id,'error-id','Mã') & check.kiemTraRong(emp.fullName,'error-name','Tên') & check.kiemTraRong(emp.email,'error-email','Email') & check.kiemTraRong(emp.address,'error-address','Địa chỉ') & check.kiemTraRong(emp.daysOfWork,'error-days','Số ngày làm') & check.kiemTraRong(emp.dailySalary,'error-salary','Lương') ;
+
+  valid = check.kiemTraSo(emp.id,'error-id-1','Mã')  & check.kiemTraSo(emp.daysOfWork,'error-days-1','Số ngày làm') & check.kiemTraSo(emp.dailySalary,'error-salary-1','Lương');
+  valid = check.kiemTraKyTu(emp.fullName,'error-name-1','Tên');
+  valid = check.kiemTraEmail(emp.email,'error-email-1','Email');
+
+  if(!valid){
+    return;
+  }
     listPerson.addPerson(emp);
     renderTableEmployee(listPerson.arrPerson);
     saveEmployee();
@@ -77,11 +89,25 @@ window.fixEmployee = function(id) {
 
 document.querySelector('#btn-update').onclick = function () {
     var empUpdate = new Employee();
+    let check = new Validation();
+
     var arrInput = document.querySelectorAll('.modal-body input');
     for (let input of arrInput) {
         let { id, value } = input;
         empUpdate[id] = value;
     }
+
+    var valid = true;
+  valid = check.kiemTraRong(empUpdate.id,'error-id','Mã') & check.kiemTraRong(empUpdate.fullName,'error-name','Tên') & check.kiemTraRong(empUpdate.email,'error-email','Email') & check.kiemTraRong(empUpdate.address,'error-address','Địa chỉ') & check.kiemTraRong(empUpdate.daysOfWork,'error-days','Số ngày làm') & check.kiemTraRong(empUpdate.dailySalary,'error-salary','Lương');
+
+  valid = check.kiemTraSo(empUpdate.id,'error-id-1','Mã') & check.kiemTraSo(empUpdate.daysOfWork,'error-days-1','Số ngày làm') & check.kiemTraSo(empUpdate.dailySalary,'error-salary-1','Lương');
+  valid = check.kiemTraKyTu(empUpdate.fullName,'error-name-1','Tên');
+  valid = check.kiemTraEmail(empUpdate.email,'error-email-1','Email');
+
+  if(!valid){
+    return;
+  }
+
     listPerson.updatePerson(empUpdate);
     renderTableEmployee(listPerson.arrPerson);
     saveEmployee();

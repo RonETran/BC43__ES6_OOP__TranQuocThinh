@@ -1,5 +1,7 @@
 import { ListPerson } from "../models/ListPerson.js";
 import { Student } from "../models/Student.js";
+import { Validation } from "../util/Validation.js";
+
 
 document.getElementById("addStu").onclick = () => {
   document.getElementById("btn-update").disabled = true;
@@ -45,10 +47,23 @@ function renderTableStudent(arrStudent) {
 
 document.querySelector("#btn-add").onclick = function () {
   var stu = new Student();
+  let check = new Validation();
+
   var arrInput = document.querySelectorAll(".modal-body input");
   for (let input of arrInput) {
     let { id, value } = input;
     stu[id] = value;
+  }
+  
+  var valid = true;
+  valid = check.kiemTraRong(stu.id,'error-id','Mã') & check.kiemTraRong(stu.fullName,'error-name','Tên') & check.kiemTraRong(stu.email,'error-email','Email') & check.kiemTraRong(stu.address,'error-address','Địa chỉ') & check.kiemTraRong(stu.math,'error-math','Điểm') & check.kiemTraRong(stu.physics,'error-physics','Điểm') & check.kiemTraRong(stu.chemistry,'error-chemistry','Điểm') ;
+
+  valid = check.kiemTraSo(stu.id,'error-id-1','Mã') & check.kiemTraSo(stu.math,'error-math-1','Điểm') & check.kiemTraSo(stu.physics,'error-physics-1','Điểm') & check.kiemTraSo(stu.chemistry,'error-chemistry-1','Điểm');
+  valid = check.kiemTraKyTu(stu.fullName,'error-name-1','Tên');
+  valid = check.kiemTraEmail(stu.email,'error-email-1','Email');
+
+  if(!valid){
+    return;
   }
   
 
@@ -64,6 +79,7 @@ window.removeStudent = function (id) {
 
 window.fixStudent = function (id) {
   let stuFix = listPerson.getInfoPerson(id);
+  
   if (stuFix) {
     var arrInput = document.querySelectorAll(".modal-body input");
     for (let input of arrInput) {
@@ -71,6 +87,7 @@ window.fixStudent = function (id) {
       input.value = stuFix[id];
     }
   }
+  
   document.getElementById("id").disabled = true;
   document.getElementById("btn-add").disabled = true;
   document.getElementById("btn-update").disabled = false;
@@ -78,11 +95,25 @@ window.fixStudent = function (id) {
 
 document.querySelector("#btn-update").onclick = function () {
   var stuUpdate = new Student();
+  let check = new Validation();
+
   var arrInput = document.querySelectorAll(".modal-body input");
   for (let input of arrInput) {
     let { id, value } = input;
     stuUpdate[id] = value;
+  } 
+
+  var valid = true;
+  valid = check.kiemTraRong(stuUpdate.id,'error-id','Mã') & check.kiemTraRong(stuUpdate.fullName,'error-name','Tên') & check.kiemTraRong(stuUpdate.email,'error-email','Email') & check.kiemTraRong(stuUpdate.address,'error-address','Địa chỉ') & check.kiemTraRong(stuUpdate.math,'error-math','Điểm') & check.kiemTraRong(stuUpdate.physics,'error-physics','Điểm') & check.kiemTraRong(stuUpdate.chemistry,'error-chemistry','Điểm') ;
+
+  valid = check.kiemTraSo(stuUpdate.id,'error-id-1','Mã') & check.kiemTraSo(stuUpdate.math,'error-math-1','Điểm') & check.kiemTraSo(stuUpdate.physics,'error-physics-1','Điểm') & check.kiemTraSo(stuUpdate.chemistry,'error-chemistry-1','Điểm');
+  valid = check.kiemTraKyTu(stuUpdate.fullName,'error-name-1','Tên');
+  valid = check.kiemTraEmail(stuUpdate.email,'error-email-1','Email');
+
+  if(!valid){
+    return;
   }
+  
   listPerson.updatePerson(stuUpdate);
   renderTableStudent(listPerson.arrPerson);
   saveStudent();
