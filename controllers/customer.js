@@ -61,17 +61,25 @@ document.querySelector("#btn-add").onclick = function () {
 
   valid = check.kiemTraSo(cus.id,'error-id-1','Mã') & check.kiemTraSo(cus.invoiceValue,'error-value-1','Trị giá hóa đơn');
   valid = check.kiemTraKyTu(cus.fullName,'error-name-1','Tên');
-  valid = check.kiemTraEmail(cus.email,'error-email-1','Email');
   valid = check.kiemTraDanhGia(cus.rating,'error-rating','đánh giá');
+  valid = check.kiemTraEmail(cus.email,'error-email-1','Email');
 
   if(!valid){
     return;
   }
 
-
   listPerson.addPerson(cus);
   renderTableCustomer(listPerson.arrPerson);
   saveCustomer();
+
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+  var resetSelect = document.querySelector('.modal-body select');
+  resetSelect.value = 'Chọn đánh giá';
+
+  document.querySelector('button[data-bs-dismiss]').click();
 };
 
 window.removeCustomer = function (id) {
@@ -118,6 +126,15 @@ document.querySelector("#btn-update").onclick = function () {
   listPerson.updatePerson(cusUpdate);
   renderTableCustomer(listPerson.arrPerson);
   saveCustomer();
+
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+  var resetSelect = document.querySelector('.modal-body select');
+  resetSelect.value = 'Chọn đánh giá';
+
+  document.querySelector('button[data-bs-dismiss]').click();
 };
 
 function saveCustomer() {

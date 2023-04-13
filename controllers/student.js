@@ -62,14 +62,21 @@ document.querySelector("#btn-add").onclick = function () {
   valid = check.kiemTraKyTu(stu.fullName,'error-name-1','Tên');
   valid = check.kiemTraEmail(stu.email,'error-email-1','Email');
 
+
   if(!valid){
     return;
   }
   
-
   listPerson.addPerson(stu);
   renderTableStudent(listPerson.arrPerson);
   saveStudent();
+
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+
+  document.querySelector('button[data-bs-dismiss]').click();
 };
 
 window.removeStudent = function (id) {
@@ -117,6 +124,13 @@ document.querySelector("#btn-update").onclick = function () {
   listPerson.updatePerson(stuUpdate);
   renderTableStudent(listPerson.arrPerson);
   saveStudent();
+
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+
+  document.querySelector('button[data-bs-dismiss]').click();
 };
 
 function saveStudent() {
@@ -130,7 +144,6 @@ function getArrStudent() {
     listPerson.arrPerson = JSON.parse(stringStudent);
   }
 }
-
 
 
 
