@@ -145,6 +145,20 @@ document.querySelector("#btn-update").onclick = function () {
   document.querySelector("button[data-bs-dismiss]").click();
 };
 
+
+document.getElementById('close-1').onclick = function(){
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+}
+document.getElementById('close-2').onclick = function(){
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+}
+
 function saveEmployee() {
   let stringEmployee = JSON.stringify(listPerson.arrPerson);
   localStorage.setItem("arrEmployee", stringEmployee);

@@ -139,6 +139,23 @@ document.querySelector("#btn-update").onclick = function () {
   document.querySelector('button[data-bs-dismiss]').click();
 };
 
+document.getElementById('close-1').onclick = function(){
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+  var resetSelect = document.querySelector('.modal-body select');
+  resetSelect.value = 'Chọn đánh giá';
+}
+document.getElementById('close-2').onclick = function(){
+  var clearInput = document.querySelectorAll(".modal-body input");
+  for (let input of clearInput) {
+    input.value = '';
+  }
+  var resetSelect = document.querySelector('.modal-body select');
+  resetSelect.value = 'Chọn đánh giá';
+}
+
 function saveCustomer() {
   let stringCustomer = JSON.stringify(listPerson.arrPerson);
   localStorage.setItem("arrCustomer", stringCustomer);
