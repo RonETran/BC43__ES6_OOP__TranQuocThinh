@@ -33,12 +33,5 @@ export class ListPerson {
         }
     }
 
-    sortByName() {
-        this.persons.sort((a, b) => a.name.localeCompare(b.name));
-    }
-    
-    filterByType(type) {
-        return this.persons.filter((person) => person.constructor.name === type);
-    }
 }
 
