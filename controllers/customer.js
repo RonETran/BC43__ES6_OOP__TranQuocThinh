@@ -63,6 +63,7 @@ document.querySelector("#btn-add").onclick = function () {
   valid = check.kiemTraKyTu(cus.fullName,'error-name-1','Tên');
   valid = check.kiemTraDanhGia(cus.rating,'error-rating','đánh giá');
   valid = check.kiemTraEmail(cus.email,'error-email-1','Email');
+  valid = checkId();
 
   if(!valid){
     return;
@@ -80,6 +81,7 @@ document.querySelector("#btn-add").onclick = function () {
   resetSelect.value = 'Chọn đánh giá';
 
   document.querySelector('button[data-bs-dismiss]').click();
+  
 };
 
 window.removeCustomer = function (id) {
@@ -148,3 +150,17 @@ function getArrCustomer() {
     listPerson.arrPerson = JSON.parse(stringCustomer);
   }
 }
+
+function checkId() {
+  var valid = true;
+  var stringCus = localStorage.getItem('arrCustomer');
+  var cus = JSON.parse(stringCus);
+  var input = document.getElementById('id').value;
+  for(let i of cus){
+    if(input === i.id || input === '') {
+      return false;
+    }
+  }
+  return valid;
+}
+

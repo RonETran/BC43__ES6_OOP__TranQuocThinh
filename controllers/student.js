@@ -61,6 +61,7 @@ document.querySelector("#btn-add").onclick = function () {
   valid = check.kiemTraSo(stu.id,'error-id-1','Mã') & check.kiemTraSo(stu.math,'error-math-1','Điểm') & check.kiemTraSo(stu.physics,'error-physics-1','Điểm') & check.kiemTraSo(stu.chemistry,'error-chemistry-1','Điểm');
   valid = check.kiemTraKyTu(stu.fullName,'error-name-1','Tên');
   valid = check.kiemTraEmail(stu.email,'error-email-1','Email');
+  valid = checkId();
 
 
   if(!valid){
@@ -145,5 +146,17 @@ function getArrStudent() {
   }
 }
 
+function checkId() {
+  var valid = true;
+  var stringStu = localStorage.getItem('arrStudent');
+  var stu = JSON.parse(stringStu);
+  var input = document.getElementById('id').value;
+  for(let i of stu){
+    if(input === i.id || input === '') {
+      return false;
+    }
+  }
+  return valid;
+}
 
 

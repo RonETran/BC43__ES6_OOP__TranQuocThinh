@@ -67,6 +67,7 @@ document.querySelector("#btn-add").onclick = function () {
     check.kiemTraSo(emp.dailySalary, "error-salary-1", "Lương");
   valid = check.kiemTraKyTu(emp.fullName, "error-name-1", "Tên");
   valid = check.kiemTraEmail(emp.email, "error-email-1", "Email");
+  valid = checkId();
 
   if (!valid) {
     return;
@@ -154,4 +155,17 @@ function getArrEmployee() {
     var stringEmployee = localStorage.getItem("arrEmployee");
     listPerson.arrPerson = JSON.parse(stringEmployee);
   }
+}
+
+function checkId() {
+  var valid = true;
+  var stringEmp = localStorage.getItem('arrEmployee');
+  var emp = JSON.parse(stringEmp);
+  var input = document.getElementById('id').value;
+  for(let i of emp){
+    if(input === i.id || input === '') {
+      return false;
+    }
+  }
+  return valid;
 }
